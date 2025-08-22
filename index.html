@@ -24,7 +24,7 @@
       --subtle: #f5f7fa;
       --card: #fff;
       --border: #e3e7ee;
-      --accent: #4caf50;
+      --accent: #4caf50; /* green for primary button */
       --warn: #d9534f;
       --mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       --soft-grey: #f3f4f6;
@@ -35,17 +35,8 @@
     html,body { background: var(--subtle); color: var(--ink); margin: 0; padding: 0; }
     body { font-family: 'CurrysSans Regular', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 
-    .container {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 14px;
-    }
-
-    img.logo {
-      max-width: 180px;
-      display: block;
-      margin: 10px auto 8px auto;
-    }
+    .container { max-width: 820px; margin: 0 auto; padding: 14px; }
+    img.logo { max-width: 180px; display: block; margin: 10px auto 8px auto; }
 
     h1,h2,h3,h4,h5,h6 { font-family: 'CurrysSans Headline', Arial, sans-serif; margin: 0 0 8px 0; }
     h1.center { text-align: center; }
@@ -72,18 +63,10 @@
       border-radius: 8px;
       margin: 12px 0;
     }
+    .callout-accent { border-left-color: var(--accent); background: #edfbef; }
+    .callout-warn { border-left-color: var(--warn); background: #fff2f1; }
 
-    .callout-accent {
-      border-left-color: var(--accent);
-      background: #edfbef;
-    }
-
-    .callout-warn {
-      border-left-color: var(--warn);
-      background: #fff2f1;
-    }
-
-    /* —— Copy panel (now grey, dashed) —— */
+    /* —— Copy panel (grey, dashed) —— */
     .codepanel {
       position: relative;
       background: var(--soft-grey);
@@ -95,6 +78,8 @@
     }
     .codepanel header {
       display: flex; align-items: center; justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
       padding: 10px 12px;
       background: #ffffff;
       border-bottom: 2px dashed var(--mid-grey);
@@ -105,17 +90,17 @@
 
     .codepanel button.copy {
       appearance: none;
-      border: 1px solid #bbb;
-      background: #e9ecef;
-      color: #111;
+      border: 1px solid var(--accent);
+      background: rgb(76 175 80);
+      color: #fff;
       border-radius: 10px;
       padding: 10px 16px;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 15px;
       cursor: pointer;
       box-shadow: 0 1px 0 rgba(0,0,0,.05);
     }
-    .codepanel button.copy:hover { background: #f1f3f5; }
+    .codepanel button.copy:hover { filter: brightness(1.03); }
     .codepanel button.copy:active { transform: translateY(1px); }
 
     .codepanel pre {
@@ -128,7 +113,6 @@
     }
 
     .tiny { font-size: 12px; color:#666; }
-
     .kbd {
       font-family: var(--mono);
       font-size: 12.5px;
@@ -148,6 +132,14 @@
     .badge {
       display:inline-block; padding: 3px 8px; font-size: 12px; border-radius: 999px; border:1px solid var(--border); background:#fff;
     }
+
+    /* Copy #### chip */
+    .copychip {
+      display:inline-flex; align-items:center; gap:6px;
+      border:1px dashed var(--mid-grey); background:#fff; color:#111;
+      border-radius: 8px; padding:4px 8px; font-family: var(--mono); font-size: 12.5px; cursor: pointer;
+    }
+    .copychip:hover { background:#f8f9fb; }
   </style>
 </head>
 <body>
@@ -156,44 +148,44 @@
          src="https://www.currys.co.uk/on/demandware.static/-/Sites-curryspcworlduk-Library/default/dwac98490e/images/brand-currys-logo.svg" />
 
     <h1 class="center">Outlook Web “Inject HTML” Bookmarklet</h1>
-    <p class="centered-content">One-click way to load a local <strong>filename.html</strong> and insert it into the Outlook Web <em>Message body</em>. <span class="badge">Chrome recommended</span></p>
+    <p class="centered-content">
+      One-click tool to inject a designer/MarTech-supplied <strong>HTML email</strong> (from a local <strong>filename.html</strong>)
+      into the Outlook Web <em>Message body</em>. <span class="badge">Chrome recommended</span>
+    </p>
 
-    <!-- TL;DR / Non-technical -->
+    <!-- How to use it (prominent) -->
     <div class="card">
-      <h2>🟢 TL;DR (non-technical)</h2>
+      <h2>🟢 How to use it</h2>
+      <ol>
+        <li>Open <strong>outlook.office.com</strong> and click <strong>New message</strong>.</li>
+        <li>(Optional) Place <span class="copychip" id="copyHash">#### <span aria-hidden="true">⧉</span></span> <em>before your signature</em> in the body.
+          <div class="tiny">The bookmarklet works without this; use <code>####</code> only if you want precise placement or if injection struggles to hit the body.</div>
+        </li>
+        <li>Click the <em>Outlook • Inject HTML</em> bookmark and choose your <strong>filename.html</strong> file.</li>
+      </ol>
 
-      <div class="bullet-container">
-        <p><strong>What you need</strong></p>
-        <ul>
-          <li>Chrome on macOS or Windows</li>
-          <li>Your HTML file from the Email Designer (e.g. <strong>filename.html</strong>)</li>
-          <li>Outlook Web at <strong>outlook.office.com</strong></li>
-        </ul>
-
-        <p><strong>Add the bookmarklet (Mac + PC)</strong></p>
-        <ul>
-          <li>Show the Bookmarks Bar: <span class="kbd">⌘⇧B</span> (Mac) or <span class="kbd">Ctrl+Shift+B</span> (Windows)</li>
-          <li>Right-click the bar → <strong>Add page…</strong></li>
-          <li><strong>Name:</strong> <em>Outlook • Inject HTML</em></li>
-          <li><strong>URL:</strong> copy the bookmarklet from the panel below and paste it into the URL field</li>
-        </ul>
-
-        <p><strong>Use it</strong></p>
-        <ol>
-          <li>In Outlook Web, click <strong>New message</strong> first</li>
-          <li>Click the <em>Outlook • Inject HTML</em> bookmark</li>
-          <li>Choose your <strong>filename.html</strong> (Downloads etc.) — it inserts into the <em>Message body</em></li>
-        </ol>
-
-        <div class="callout callout-accent"><strong>Common workflow:</strong> place <code>####</code> <em>before your signature</em> in the message body, then click the bookmark. The tool replaces that exact placeholder with your HTML and leaves your signature intact.</div>
-
-        <div class="callout">
-          <strong>Didn’t go into the body?</strong><br/>
-          Type <code>####</code> where you want the content, then click the bookmark again — it will target and replace that placeholder.
-        </div>
-
-        <div class="tiny">Note: Outlook strips <code>&lt;script&gt;</code> and some CSS. Use inline CSS and email-safe table layout.</div>
+      <div class="callout callout-accent">
+        <strong>Essential shortcuts</strong><br/>
+        Show Bookmarks Bar: <span class="kbd">⌘⇧B</span> (Mac) or <span class="kbd">Ctrl+Shift+B</span> (Windows) — you'll click the bookmark from here.<br/>
+        Create Bookmark: <span class="kbd">⌘D</span> (Mac) or <span class="kbd">Ctrl+D</span> (Windows).
       </div>
+
+      <div class="callout">
+        <strong>Common workflow:</strong> place <code>####</code> <em>before your signature</em>, then click the bookmark. It replaces that
+        exact placeholder with your HTML and leaves your signature intact.<br/>
+        <strong>Didn’t go into the body?</strong> Type <code>####</code> where you want the content, then click the bookmark again — it will target and replace that placeholder.
+      </div>
+    </div>
+
+    <!-- TL;DR / Setup -->
+    <div class="card">
+      <h2>🧩 Quick setup (Mac + PC)</h2>
+      <ul>
+        <li>Show the Bookmarks Bar: <span class="kbd">⌘⇧B</span> (Mac) or <span class="kbd">Ctrl+Shift+B</span> (Windows)</li>
+        <li>Create a bookmark: <span class="kbd">⌘D</span> (Mac) or <span class="kbd">Ctrl+D</span> (Windows)</li>
+        <li><strong>Name:</strong> <em>Outlook • Inject HTML</em></li>
+        <li><strong>URL:</strong> <em>paste the bookmarklet</em> (below)</li>
+      </ul>
     </div>
 
     <!-- Copy panel -->
@@ -202,13 +194,13 @@
         <strong>Bookmarklet — Inject HTML from local file (Outlook Web)</strong>
         <button class="copy" id="copyBtn" type="button" aria-label="Copy bookmarklet">Copy bookmarklet</button>
       </header>
-      <pre><code id="bmDisplay">javascript:(()=>{/* Outlook Inject HTML from Local File (target fix) */function toast(m){const t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;z-index:9999999;left:50%;top:16px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:8px;font:13px/1.3 system-ui,Segoe UI,Arial;box-shadow:0 6px 16px rgba(0,0,0,.25)';document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}function highlight(el){if(!el)return;const r=el.getBoundingClientRect();const o=document.createElement('div');o.style.cssText=`position:fixed;left:${r.left+window.scrollX}px;top:${r.top+window.scrollY}px;width:${r.width}px;height:${r.height}px;outline:3px solid #4caf50;outline-offset:0;pointer-events:none;z-index:9999998;border-radius:6px;`;document.body.appendChild(o);setTimeout(()=>o.remove(),1200)}function findBody(doc=document){let el=doc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]');if(el)return{el,ctx:doc,how:'direct'};for(const f of Array.from(doc.querySelectorAll('iframe'))){try{const idoc=f.contentDocument;if(!idoc)continue;el=idoc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]');if(el)return{el,ctx:idoc,how:'iframe'}}catch(e){}}for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){if((c.textContent||'').includes('####'))return{el:c,ctx:doc,how:'placeholder'}}let best=null,area=0;for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){const b=c.getBoundingClientRect();const a=b.width*b.height;if(a>area){area=a;best=c}}return{el:best,ctx:doc,how:'largest'}}function injectInto(targetEl,html){const cur=targetEl.innerHTML||'';if(cur.includes('####')){targetEl.innerHTML=cur.replace('####',html)}else{const has=((targetEl.innerText||'').trim().length>0);if(has){if(!confirm('No "####" in Message body. Replace ENTIRE body with your HTML?')){toast('Cancelled.');return}}targetEl.innerHTML=html}targetEl.focus&&targetEl.focus();toast('HTML injected into Message body ✔')}function pickFile(cb){const i=document.createElement('input');i.type='file';i.accept='.html,text/html,.htm';i.style.display='none';i.onchange=()=>{const f=i.files&&i.files[0];if(!f){toast('No file selected.');i.remove();return}const r=new FileReader();r.onload=()=>{cb(String(r.result||''));setTimeout(()=>i.remove(),0)};r.onerror=()=>{alert('Could not read file.')};r.readAsText(f)};document.body.appendChild(i);i.click()}if(!/outlook\.office\.com|outlook\.live\.com/.test(location.hostname)){if(!confirm('This is intended for Outlook Web. Continue anyway?'))return}const tgt=findBody();if(!tgt.el){alert('Compose “Message body” not found. Click “New message” first, then run again.');return}highlight(tgt.el);pickFile(html=>injectInto(tgt.el,html));})();</code></pre>
-      <div class="foot">Paste this directly into the <em>URL</em> field when creating a bookmark. It’s a single bookmarklet line.</div>
+      <pre><code id="bmDisplay">javascript:(()=>{ /* Outlook Inject HTML from Local File (target fix) */function toast(m){const t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;z-index:9999999;left:50%;top:16px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:8px;font:13px/1.3 system-ui,Segoe UI,Arial;box-shadow:0 6px 16px rgba(0,0,0,.25)';document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}function highlight(el){if(!el) return;const r=el.getBoundingClientRect();const o=document.createElement('div');o.style.cssText=%60position:fixed;left:${r.left+window.scrollX}px;top:${r.top+window.scrollY}px;width:${r.width}px;height:${r.height}px;outline:3px solid #4caf50;outline-offset:0;pointer-events:none;z-index:9999998;border-radius:6px;%60;document.body.appendChild(o);setTimeout(()=>o.remove(),1200)}function findBody(doc=document){/* 1) Prefer aria-label="Message body" in page */let el=doc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]');if(el) return {el,ctx:doc,how:'direct'};/* 2) Look inside iframes */for(const f of Array.from(doc.querySelectorAll('iframe'))){try{const idoc=f.contentDocument; if(!idoc) continue; el=idoc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]'); if(el) return {el,ctx:idoc,how:'iframe'};}catch(e){}}/* 3) Fallback: pick contenteditable containing #### */for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){if((c.textContent||'').includes('####')) return {el:c,ctx:doc,how:'placeholder'}}/* 4) Last resort: largest contenteditable block (avoid To/Cc by size) */let best=null,area=0;for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){const b=c.getBoundingClientRect();const a=b.width*b.height;if(a>area){area=a;best=c}}return {el:best,ctx:doc,how:'largest'}}function injectInto(targetEl,html){const cur=targetEl.innerHTML||'';if(cur.includes('####')){targetEl.innerHTML=cur.replace('####',html)}else{const has=((targetEl.innerText||'').trim().length>0);if(has){if(!confirm('No "####" in Message body. Replace ENTIRE body with your HTML?')){toast('Cancelled.');return}}targetEl.innerHTML=html}targetEl.focus&&targetEl.focus();toast('HTML injected into Message body ✔')}function pickFile(cb){const i=document.createElement('input');i.type='file';i.accept='.html,text/html,.htm';i.style.display='none';i.onchange=()=>{const f=i.files&&i.files[0];if(!f){toast('No file selected.');i.remove();return}const r=new FileReader();r.onload=()=>{cb(String(r.result||''));setTimeout(()=>i.remove(),0)};r.onerror=()=>{alert('Could not read file.');};r.readAsText(f)};document.body.appendChild(i);i.click()}if(!/outlook\.office\.com|outlook\.live\.com/.test(location.hostname)){if(!confirm('This is intended for Outlook Web. Continue anyway?')) return}const tgt=findBody(); if(!tgt.el){alert('Compose “Message body” not found. Click “New message” first, then run again.');return}highlight(tgt.el); pickFile(html=>injectInto(tgt.el,html));})();</code></pre>
+      <div class="foot"><strong>Important:</strong> Paste this directly into the <em>URL</em> field when creating a bookmark. It’s a single bookmarklet line.</div>
     </div>
 
-    <!-- Hidden single-line raw source for perfect copy -->
+    <!-- Hidden single-line raw source for perfect copy (EXACT string) -->
     <textarea id="bmRaw" style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true" readonly>
-javascript:(()=>{/* Outlook Inject HTML from Local File (target fix) */function toast(m){const t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;z-index:9999999;left:50%;top:16px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:8px;font:13px/1.3 system ui,Segoe UI,Arial;box-shadow:0 6px 16px rgba(0,0,0,.25)';document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}function highlight(el){if(!el)return;const r=el.getBoundingClientRect();const o=document.createElement('div');o.style.cssText=`position:fixed;left:${r.left+window.scrollX}px;top:${r.top+window.scrollY}px;width:${r.width}px;height:${r.height}px;outline:3px solid #4caf50;outline-offset:0;pointer-events:none;z-index:9999998;border-radius:6px;`;document.body.appendChild(o);setTimeout(()=>o.remove(),1200)}function findBody(doc=document){let el=doc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]');if(el)return{el,ctx:doc,how:'direct'};for(const f of Array.from(doc.querySelectorAll('iframe'))){try{const idoc=f.contentDocument;if(!idoc)continue;el=idoc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]');if(el)return{el,ctx:idoc,how:'iframe'}}catch(e){}}for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){if((c.textContent||'').includes('####'))return{el:c,ctx:doc,how:'placeholder'}}let best=null,area=0;for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){const b=c.getBoundingClientRect();const a=b.width*b.height;if(a>area){area=a;best=c}}return{el:best,ctx:doc,how:'largest'}}function injectInto(targetEl,html){const cur=targetEl.innerHTML||'';if(cur.includes('####')){targetEl.innerHTML=cur.replace('####',html)}else{const has=((targetEl.innerText||'').trim().length>0);if(has){if(!confirm('No "####" in Message body. Replace ENTIRE body with your HTML?')){toast('Cancelled.');return}}targetEl.innerHTML=html}targetEl.focus&&targetEl.focus();toast('HTML injected into Message body ✔')}function pickFile(cb){const i=document.createElement('input');i.type='file';i.accept='.html,text/html,.htm';i.style.display='none';i.onchange=()=>{const f=i.files&&i.files[0];if(!f){toast('No file selected.');i.remove();return}const r=new FileReader();r.onload=()=>{cb(String(r.result||''));setTimeout(()=>i.remove(),0)};r.onerror=()=>{alert('Could not read file.')};r.readAsText(f)};document.body.appendChild(i);i.click()}if(!/outlook\.office\.com|outlook\.live\.com/.test(location.hostname)){if(!confirm('This is intended for Outlook Web. Continue anyway?'))return}const tgt=findBody();if(!tgt.el){alert('Compose “Message body” not found. Click “New message” first, then run again.');return}highlight(tgt.el);pickFile(html=>injectInto(tgt.el,html));})();
+javascript:(()=>{ /* Outlook Inject HTML from Local File (target fix) */function toast(m){const t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;z-index:9999999;left:50%;top:16px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:8px;font:13px/1.3 system-ui,Segoe UI,Arial;box-shadow:0 6px 16px rgba(0,0,0,.25)';document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}function highlight(el){if(!el) return;const r=el.getBoundingClientRect();const o=document.createElement('div');o.style.cssText=%60position:fixed;left:${r.left+window.scrollX}px;top:${r.top+window.scrollY}px;width:${r.width}px;height:${r.height}px;outline:3px solid #4caf50;outline-offset:0;pointer-events:none;z-index:9999998;border-radius:6px;%60;document.body.appendChild(o);setTimeout(()=>o.remove(),1200)}function findBody(doc=document){/* 1) Prefer aria-label="Message body" in page */let el=doc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]');if(el) return {el,ctx:doc,how:'direct'};/* 2) Look inside iframes */for(const f of Array.from(doc.querySelectorAll('iframe'))){try{const idoc=f.contentDocument; if(!idoc) continue; el=idoc.querySelector('[contenteditable="true"][aria-label="Message body"],div[role="textbox"][aria-label="Message body"]'); if(el) return {el,ctx:idoc,how:'iframe'};}catch(e){}}/* 3) Fallback: pick contenteditable containing #### */for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){if((c.textContent||'').includes('####')) return {el:c,ctx:doc,how:'placeholder'}}/* 4) Last resort: largest contenteditable block (avoid To/Cc by size) */let best=null,area=0;for(const c of Array.from(doc.querySelectorAll('[contenteditable="true"],div[role="textbox"]'))){const b=c.getBoundingClientRect();const a=b.width*b.height;if(a>area){area=a;best=c}}return {el:best,ctx:doc,how:'largest'}}function injectInto(targetEl,html){const cur=targetEl.innerHTML||'';if(cur.includes('####')){targetEl.innerHTML=cur.replace('####',html)}else{const has=((targetEl.innerText||'').trim().length>0);if(has){if(!confirm('No "####" in Message body. Replace ENTIRE body with your HTML?')){toast('Cancelled.');return}}targetEl.innerHTML=html}targetEl.focus&&targetEl.focus();toast('HTML injected into Message body ✔')}function pickFile(cb){const i=document.createElement('input');i.type='file';i.accept='.html,text/html,.htm';i.style.display='none';i.onchange=()=>{const f=i.files&&i.files[0];if(!f){toast('No file selected.');i.remove();return}const r=new FileReader();r.onload=()=>{cb(String(r.result||''));setTimeout(()=>i.remove(),0)};r.onerror=()=>{alert('Could not read file.');};r.readAsText(f)};document.body.appendChild(i);i.click()}if(!/outlook\.office\.com|outlook\.live\.com/.test(location.hostname)){if(!confirm('This is intended for Outlook Web. Continue anyway?')) return}const tgt=findBody(); if(!tgt.el){alert('Compose “Message body” not found. Click “New message” first, then run again.');return}highlight(tgt.el); pickFile(html=>injectInto(tgt.el,html));})();
     </textarea>
 
     <!-- Technical section -->
@@ -241,14 +233,7 @@ javascript:(()=>{/* Outlook Inject HTML from Local File (target fix) */function 
         <li>Shows a toast: <em>“HTML injected into Message body ✔”</em></li>
       </ul>
 
-      <div class="callout-warn"><strong>Email-safety:</strong> Outlook sanitizes content; scripts are removed and some CSS is neutered. Prefer inline CSS and table layout for fidelity.</div>
-
-      <h3>Troubleshooting</h3>
-      <ul>
-        <li><strong>Nothing happens?</strong> Ensure you’re on <em>outlook.office.com</em> and clicked <em>New message</em> first.</li>
-        <li><strong>Wrong spot?</strong> Type <code>####</code> <em>before your signature</em> and run the bookmarklet again.</li>
-        <li><strong>Pop-out window?</strong> Works there too — same selectors.</li>
-      </ul>
+      <div class="callout-warn"><strong>Email-safety:</strong> Outlook strips <code>&lt;script&gt;</code> and may limit some CSS. Use inline CSS and email-safe table layout for best fidelity.</div>
     </div>
 
     <div class="footnote">
@@ -262,22 +247,23 @@ javascript:(()=>{/* Outlook Inject HTML from Local File (target fix) */function 
     (function(){
       const btn = document.getElementById('copyBtn');
       const raw = document.getElementById('bmRaw');
+      const chip = document.getElementById('copyHash');
+
+      async function copyText(text) {
+        try { await navigator.clipboard.writeText(text); }
+        catch { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+      }
 
       async function copyRaw() {
-        raw.focus();
-        raw.select();
-        raw.setSelectionRange(0, raw.value.length);
-        try {
-          await navigator.clipboard.writeText(raw.value.trim());
-        } catch (e) {
-          document.execCommand('copy'); // fallback
-        }
+        // Copy exact single-line bookmarklet from hidden textarea
+        await copyText(raw.value.trim());
         const original = btn.textContent;
         btn.textContent = 'Copied ✓';
         setTimeout(()=>btn.textContent = original, 1200);
       }
 
       btn.addEventListener('click', copyRaw);
+      chip && chip.addEventListener('click', ()=>copyText('####'));
     })();
   </script>
 </body>
