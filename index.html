@@ -140,6 +140,20 @@
       border-radius: 8px; padding:4px 8px; font-family: var(--mono); font-size: 12.5px; cursor: pointer;
     }
     .copychip:hover { background:#f8f9fb; }
+
+    /* Draggable pill */
+    .draglet {
+      display:inline-block;
+      text-decoration:none;
+      background: var(--brand);
+      color:#fff;
+      font-weight:800;
+      padding:10px 16px;
+      border-radius:999px;
+      box-shadow:0 2px 8px rgba(0,0,0,.12);
+      border:1px solid rgba(0,0,0,.05);
+    }
+    .draglet:hover { filter: brightness(1.05); }
   </style>
 </head>
 <body>
@@ -166,8 +180,8 @@
 
       <div class="callout callout-accent">
         <strong>Essential shortcuts</strong><br/>
-        Show Bookmarks Bar: <span class="kbd">⌘⇧B</span> (Mac) or <span class="kbd">Ctrl+Shift+B</span> (Windows) — you'll click the bookmark from here.<br/>
-        Create Bookmark: <span class="kbd">⌘D</span> (Mac) or <span class="kbd">Ctrl+D</span> (Windows).
+        Show Bookmarks Bar: <span class="kbd">⌘⇧B</span> (Mac) or <span class="kbd">Ctrl+Shift+B</span> (Windows) — the bar must be visible to add/see the bookmark.<br/>
+        Open Bookmark Manager: <span class="kbd">⌥⌘B</span> (Mac) or <span class="kbd">Ctrl+Shift+O</span> (Windows).
       </div>
 
       <div class="callout">
@@ -177,14 +191,22 @@
       </div>
     </div>
 
-    <!-- TL;DR / Setup -->
+    <!-- Add it to Chrome -->
     <div class="card">
-      <h2>🧩 Quick setup (Mac + PC)</h2>
+      <h2>📌 Add the bookmarklet</h2>
+      <p><strong>Step 1:</strong> Make sure the <em>Bookmarks Bar</em> is visible (<span class="kbd">⌘⇧B</span> / <span class="kbd">Ctrl+Shift+B</span>).</p>
+
+      <p><strong>Step 2 (recommended):</strong> <em>Drag</em> this button to your Bookmarks Bar:</p>
+      <p class="centered-content">
+        <a id="dragLink" class="draglet" href="#" draggable="true" title="Drag to your Bookmarks Bar">Outlook • Inject HTML</a>
+      </p>
+      <p class="tiny centered-content">Tip: Don’t click it here—<em>drag it</em> onto the Bar to create the bookmarklet.</p>
+
+      <p><strong>Alternative (keyboard-friendly):</strong></p>
       <ul>
-        <li>Show the Bookmarks Bar: <span class="kbd">⌘⇧B</span> (Mac) or <span class="kbd">Ctrl+Shift+B</span> (Windows)</li>
-        <li>Create a bookmark: <span class="kbd">⌘D</span> (Mac) or <span class="kbd">Ctrl+D</span> (Windows)</li>
-        <li><strong>Name:</strong> <em>Outlook • Inject HTML</em></li>
-        <li><strong>URL:</strong> <em>paste the bookmarklet</em> (below)</li>
+        <li>Open Bookmark Manager (<span class="kbd">⌥⌘B</span> / <span class="kbd">Ctrl+Shift+O</span>)</li>
+        <li>Click <strong>New bookmark</strong>, set <em>Name</em> to <strong>Outlook • Inject HTML</strong></li>
+        <li>Paste the bookmarklet into the <strong>URL</strong> field and save it to the <em>Bookmarks Bar</em></li>
       </ul>
     </div>
 
@@ -248,22 +270,42 @@ javascript:(()=>{ /* Outlook Inject HTML from Local File (target fix) */function
       const btn = document.getElementById('copyBtn');
       const raw = document.getElementById('bmRaw');
       const chip = document.getElementById('copyHash');
+      const dragLink = document.getElementById('dragLink');
 
       async function copyText(text) {
         try { await navigator.clipboard.writeText(text); }
-        catch { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+        catch {
+          const ta=document.createElement('textarea'); ta.value=text;
+          document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+        }
       }
 
       async function copyRaw() {
         // Copy exact single-line bookmarklet from hidden textarea
-        await copyText(raw.value.trim());
+        const code = raw.value.trim();
+        await copyText(code);
         const original = btn.textContent;
         btn.textContent = 'Copied ✓';
         setTimeout(()=>btn.textContent = original, 1200);
       }
 
+      // set draggable link href from the same exact source string
+      function setDragHref() {
+        const code = raw.value.trim();
+        dragLink.setAttribute('href', code);
+        dragLink.setAttribute('title', 'Drag to your Bookmarks Bar');
+      }
+
       btn.addEventListener('click', copyRaw);
       chip && chip.addEventListener('click', ()=>copyText('####'));
+
+      // Prevent executing the bookmarklet on this page if clicked; instruct to drag
+      dragLink.addEventListener('click', (e)=>{
+        e.preventDefault();
+        alert('Drag this button to your Bookmarks Bar to create the bookmarklet.');
+      });
+
+      setDragHref();
     })();
   </script>
 </body>
