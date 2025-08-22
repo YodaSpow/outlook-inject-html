@@ -69,6 +69,9 @@
     .draglet{display:inline-block; text-decoration:none; background:var(--brand); color:#fff; font-weight:800; padding:10px 16px; border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,.12); border:1px solid rgba(0,0,0,.05);}
     .draglet:hover{filter:brightness(1.05);}
 
+    /* external-link arrow */
+    a.ext::after {content: "↗"; margin-left: 4px; font-size: .9em; opacity: .8;}
+    
     .footnote{font-size:.95em; color:#555; margin-top:16px; border-top:1px solid #ccc; padding-top:10px; text-align:left;}
   </style>
 </head>
@@ -172,10 +175,15 @@ javascript:(()=>{ /* Outlook Inject HTML from Local File (target fix) */function
     </div>
 
     <div class="footnote">
-      Built for Chrome on macOS/Windows. © Currys. This page mirrors the styling of
-      <a href="https://www.currys.co.uk/" target="_blank" rel="noopener noreferrer">www.currys.co.uk</a>.
-      Built by: <a href="https://github.com/YodaSpow" target="_blank" rel="noopener noreferrer">YodaSpow</a> with ChatGTP5
+      Built by: <a class="ext" href="https://github.com/YodaSpow" target="_blank" rel="noopener noreferrer">YodaSpow</a> with ChatGTP5
+      <span aria-hidden="true"> · </span>
+      Chrome-only tested (macOS/Windows)
+      <span aria-hidden="true"> · </span>
+      © Currys
+      <span aria-hidden="true"> · </span>
+      <a class="ext" href="https://www.currys.co.uk/" target="_blank" rel="noopener noreferrer">www.currys.co.uk</a>
     </div>
+    
   </div>
 
   <script>
