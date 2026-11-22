@@ -1,0 +1,157 @@
+{
+  "artifact": {
+    "filename": "outlook-compose-html-0.1.1-20261121T012853Z.zip",
+    "sha256": "f70b46a2e957e9910adf4d6f56f6bbe9d9e8520be287a1c8a06ba82ffde1df48",
+    "size": 36554
+  },
+  "artifact_verification": {
+    "entry_count": 8,
+    "inventory_sha256": "e8100e95be20ce0dd65ac4f59793608d3d023df8a2581f9b4f77daeecd59accf",
+    "verified": true
+  },
+  "asset_lineage": {
+    "path": "workspaces/compose-enrichment/extensions/outlook-compose-html/assets/provenance.json",
+    "sha256": "984e2988769bb4e8584a9e3aa3e09864146fad861411ad6582a6c0053bc523dd"
+  },
+  "authority": {
+    "browser_installation": "action_time_operator_confirmation_required",
+    "download_wiring": "disabled",
+    "publication": "disabled",
+    "push": "disabled"
+  },
+  "contract_sha256": "06d9ee05606e112ec7d5182144a638774ffe0ed98873b8b6d37d897bb7aa06db",
+  "evidence": {
+    "built": true,
+    "installed": false,
+    "outlook_fixture_exercised": false,
+    "published": false
+  },
+  "git": {
+    "candidate_may_include_uncommitted_contract_or_tooling": true,
+    "preparation_head": "1379538cb2fba0a7c78ba26e22167740269ce4b3",
+    "publication_transaction_separately_gated": true,
+    "source_commit": "2695617e698594d186c68eb76722a680bf8240aa"
+  },
+  "identity": {
+    "child": "outlook-compose-html",
+    "family": "compose-enrichment",
+    "title": "Outlook Compose HTML"
+  },
+  "preparation": {
+    "derived_output_is_authoring_source": false,
+    "lane": "on-demand-local",
+    "source_fingerprint": "9776a7305d6d442da735e08774c3141ea46fbb7a47a154e3e236e5efba8a0319"
+  },
+  "publication": {
+    "baseline_commit": "b0a28c1523cda5fdc84d1e646fb2ba3b35c4e86c",
+    "branch": "main",
+    "download_url": "https://raw.githubusercontent.com/YodaSpow/outlook-inject-html/main/release-assets/outlook-compose-html-0.1.1-20261121T012853Z.zip",
+    "final_link_mode": "absolute-github-raw",
+    "rehearsal_download_path": "release-assets/outlook-compose-html-0.1.1-20261121T012853Z.zip",
+    "repository_remote": "git@github.com:YodaSpow/outlook-inject-html.git",
+    "state": "local_candidate",
+    "transaction_plan": [
+      {
+        "paths": [
+          "archive/bookmarklet/README.md",
+          "archive/bookmarklet/assets/brand-currys-logo.svg",
+          "archive/bookmarklet/index.html"
+        ],
+        "phase": "archive-first"
+      },
+      {
+        "paths": [
+          "README.md",
+          "assets/favicon-16.png",
+          "assets/favicon-32.png",
+          "assets/outlook-compose-html-web-master.png",
+          "index.html",
+          "release-assets/outlook-compose-html-0.1.1-20261121T012853Z.zip",
+          "release-assets/outlook-compose-html-0.1.1-20261121T012853Z.zip.sha256",
+          "release.json"
+        ],
+        "phase": "root-release"
+      }
+    ]
+  },
+  "release": {
+    "artifact": "github-release-zip",
+    "build_id": "2026-11-21T01:28:53Z",
+    "install_route": "extract-then-load-unpacked",
+    "state": "active",
+    "version": "0.1.1"
+  },
+  "runtime_inventory": [
+    {
+      "executable": false,
+      "path": "content.js",
+      "sha256": "4a1759433fcc9667e76c0d7ba9262a1799aac1118af975fac9c08a3d2287a593",
+      "size": 5208
+    },
+    {
+      "executable": false,
+      "path": "images/icon-128.png",
+      "sha256": "01ce4793ce4b1eaf249612f9f8892d8d4c5b38e293b174169af1d342c5b60170",
+      "size": 22559
+    },
+    {
+      "executable": false,
+      "path": "images/icon-16.png",
+      "sha256": "a9aeac710b0e1190b5a5fe1b66413b2dab535759d589cf8fd8a7a29a7d74f853",
+      "size": 1600
+    },
+    {
+      "executable": false,
+      "path": "images/icon-32.png",
+      "sha256": "5759287cceeb9f9ebbc87b11539c4d291ce4708149747ad799a7114739186ff7",
+      "size": 3073
+    },
+    {
+      "executable": false,
+      "path": "images/icon-48.png",
+      "sha256": "d35a17550c335acb6a7e5279b3925bb96a4d65ddb1642b1d4b5f7e31d33c6f26",
+      "size": 5012
+    },
+    {
+      "executable": false,
+      "path": "lib/contracts.js",
+      "sha256": "09a8d6b5b6fb629d748a1fcf6cc85dcbbc79e97aae8df4075b332191b32ad2c8",
+      "size": 1597
+    },
+    {
+      "executable": false,
+      "path": "manifest.json",
+      "sha256": "5b16806d9daaaeb35050b42bc22d5e306a88453b6b5bf188e16a9e5d9a6dfdff",
+      "size": 908
+    },
+    {
+      "executable": false,
+      "path": "service-worker.js",
+      "sha256": "5f7a26f356ee5512f26cc1e5bf4d3a8eb4e62f6152f6be4fc71187d853655b37",
+      "size": 1797
+    }
+  ],
+  "schema_version": 1,
+  "source": {
+    "candidate_state": "validated-child-runtime",
+    "classification": "browser-portable",
+    "commit": "2695617e698594d186c68eb76722a680bf8240aa",
+    "durable_owner": "workspaces/compose-enrichment/extensions/outlook-compose-html",
+    "runtime": "workspaces/compose-enrichment/extensions/outlook-compose-html/extension",
+    "runtime_tree_sha256": "e8100e95be20ce0dd65ac4f59793608d3d023df8a2581f9b4f77daeecd59accf"
+  },
+  "targets": [
+    {
+      "browser": "Chrome",
+      "evidence_state": "installed_unpacked_source_pre_promotion",
+      "os": "macOS",
+      "validation_route": "verify ZIP, extract once, Load unpacked from extracted extension directory, exercise sealed Outlook fixture"
+    },
+    {
+      "browser": "Chrome",
+      "evidence_state": "declared_unverified",
+      "os": "Windows",
+      "validation_route": "verify ZIP, extract once, Load unpacked from extracted extension directory, exercise sealed Outlook fixture"
+    }
+  ]
+}
