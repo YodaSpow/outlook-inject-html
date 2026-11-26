@@ -11,8 +11,8 @@
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2026-11-21T13:12:07Z">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=2026-11-21T13:12:07Z">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2026-11-26T02:30:44Z">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=2026-11-26T02:30:44Z">
   <title>Outlook Compose HTML</title>
   <script>
     (() => {
@@ -107,15 +107,23 @@
     }
 
     .hero-action {
-      display: flex;
-      align-items: center;
-      gap: 18px;
       margin-top: 34px;
     }
+
+    .access-routes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 570px;
+    }
+
+    .access-route { min-width: 0; }
 
     .download-button {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      width: 100%;
       min-height: 52px;
       padding: 0 24px;
       border: 0;
@@ -146,9 +154,40 @@
       outline-offset: 3px;
     }
 
-    .package-note {
-      color: var(--muted);
-      font-size: 0.86rem;
+    .sharepoint-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 52px;
+      padding: 0 24px;
+      border: 1px solid var(--purple);
+      background: var(--surface);
+      color: var(--purple);
+      font: inherit;
+      font-weight: 760;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 120ms ease, color 120ms ease;
+    }
+
+    .sharepoint-button:link,
+    .sharepoint-button:visited,
+    .sharepoint-button:hover,
+    .sharepoint-button:active,
+    .sharepoint-button:focus-visible {
+      color: var(--purple);
+      text-decoration: none;
+    }
+
+    .sharepoint-button:hover {
+      background: var(--purple-soft);
+    }
+
+    .sharepoint-button:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
     }
 
     .hero-icon {
@@ -339,6 +378,7 @@
     @media (max-width: 720px) {
       .shell { width: min(100% - 30px, 1060px); }
       .hero { grid-template-columns: 1fr; gap: 46px; padding: 62px 0; }
+      .access-routes { grid-template-columns: 1fr; max-width: 360px; }
       .install, .use-once { grid-template-columns: 1fr; gap: 28px; }
       .step { grid-template-columns: 38px 1fr; }
       .step-copy, .step-detail { grid-column: 2; }
@@ -355,11 +395,17 @@
           <h1>Outlook Compose HTML</h1>
           <p class="tagline">Insert a local HTML email into your active Outlook draft.</p>
           <div class="hero-action">
-            <a class="download-button" href="https://raw.githubusercontent.com/YodaSpow/outlook-inject-html/main/release-assets/outlook-compose-html-0.1.1-20261121T012853Z.zip" download="outlook-compose-html-0.1.1-20261121T012853Z.zip">Download extension</a>
-            <span class="package-note">Chrome · ZIP package</span>
+            <div class="access-routes">
+              <div class="access-route">
+                <a class="download-button" href="https://raw.githubusercontent.com/YodaSpow/outlook-inject-html/main/release-assets/outlook-compose-html-0.1.1-20261121T012853Z.zip" download="outlook-compose-html-0.1.1-20261121T012853Z.zip" aria-label="Download extension — Chrome ZIP package">Download extension</a>
+              </div>
+              <div class="access-route">
+                <a class="sharepoint-button" href="https://dixonsretail.sharepoint.com/:fl:/g/contentstorage/CSP_76460c4b-3947-4351-b98e-d34cd2dbab85/IQAZQm9j9FNtTYZqpVt7h4qsARtBD4cj3i1e6jznrK8aGHw?e=0GWYLR&amp;nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF83NjQ2MGM0Yi0zOTQ3LTQzNTEtYjk4ZS1kMzRjZDJkYmFiODUmZD1iJTIxU3d4R2RrYzVVVU81anROTTB0dXJoVHB2QlpQaFJkeERsbVNHUkJSYXlQU3gtNENQR2RuQ1NwZ2M3SlR0eG5VOCZmPTAxRVJVSUZaSVpJSlhXSDVDVE5WR1lNMlZGTE41WVBDVk0mYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4a2FYaHZibk55WlhSaGFXd3VjMmhoY21Wd2IybHVkQzVqYjIxOFlpRlRkM2hIWkd0ak5WVlZUelZxZEU1Tk1IUjFjbWhVY0haQ1dsQm9VbVI0Ukd4dFUwZFNRbEpoZVZCVGVDMDBRMUJIWkc1RFUzQm5ZemRLVkhSNGJsVTRmREF4UlZKVlNVWmFUVFpXUVV0RFNWWlRNMDVLU0ZsU05FOUdOVFJKVFZCVk5GUSUzRCUyMiUyQyUyMmklMjIlM0ElMjI3OTcxNWZiNS04NTc0LTQ0YTYtODU4OS03MGMwZWMwNGY5NjQlMjIlN0Q%3D" aria-label="Access with SharePoint — company sign-in required" target="_blank" rel="noopener noreferrer">Access with SharePoint</a>
+              </div>
+            </div>
           </div>
         </div>
-        <img class="hero-icon" src="assets/outlook-compose-html-web-master.png?v=2026-11-21T13:12:07Z" width="630" height="630" alt="Purple envelope containing an HTML code sheet">
+        <img class="hero-icon" src="assets/outlook-compose-html-web-master.png?v=2026-11-26T02:30:44Z" width="630" height="630" alt="Purple envelope containing an HTML code sheet">
       </section>
 
       <section class="install" id="install">
@@ -397,7 +443,7 @@
     </main>
 
     <footer>
-      <span>Built by: <a href="https://github.com/YodaSpow" target="_blank" rel="noopener noreferrer"><span class="footer-link-label">YodaSpow</span><span class="external-arrow" aria-hidden="true">↗</span></a> with ChatGPT · Chrome-only tested (macOS/Windows)</span>
+      <span>Built by: <a href="https://github.com/YodaSpow" target="_blank" rel="noopener noreferrer"><span class="footer-link-label">YodaSpow</span><span class="external-arrow" aria-hidden="true">↗</span></a> with ChatGPT · Chrome-only tested (macOS/Windows) · UI Build 2026-11-26T02:30:44Z</span>
       <button class="theme-toggle" type="button" aria-label="Switch to dark theme"><span class="theme-toggle-icon" aria-hidden="true">◐</span><span class="theme-toggle-label">Dark theme</span></button>
     </footer>
   </div>

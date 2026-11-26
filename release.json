@@ -28,7 +28,7 @@
   },
   "git": {
     "candidate_may_include_uncommitted_contract_or_tooling": true,
-    "preparation_head": "1379538cb2fba0a7c78ba26e22167740269ce4b3",
+    "preparation_head": "1b4cf1941d637f18c7eeafaff3c57273714d2a86",
     "publication_transaction_separately_gated": true,
     "source_commit": "2695617e698594d186c68eb76722a680bf8240aa"
   },
@@ -43,7 +43,7 @@
     "source_fingerprint": "9776a7305d6d442da735e08774c3141ea46fbb7a47a154e3e236e5efba8a0319"
   },
   "publication": {
-    "baseline_commit": "b0a28c1523cda5fdc84d1e646fb2ba3b35c4e86c",
+    "baseline_commit": "3cef4f64463fecff6b7f3506e497fac04c9871cf",
     "branch": "main",
     "download_url": "https://raw.githubusercontent.com/YodaSpow/outlook-inject-html/main/release-assets/outlook-compose-html-0.1.1-20261121T012853Z.zip",
     "final_link_mode": "absolute-github-raw",
