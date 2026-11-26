@@ -11,8 +11,8 @@
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2026-11-26T02:30:44Z">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=2026-11-26T02:30:44Z">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2026-11-26T03:05:05Z">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=2026-11-26T03:05:05Z">
   <title>Outlook Compose HTML</title>
   <script>
     (() => {
@@ -104,6 +104,19 @@
       font-size: clamp(1.25rem, 2.3vw, 1.75rem);
       line-height: 1.42;
       letter-spacing: -0.025em;
+    }
+
+    .outlook-inline-link:link,
+    .outlook-inline-link:visited,
+    .outlook-inline-link:active {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+    }
+
+    .outlook-inline-link:hover {
+      color: #8259c2;
+      text-decoration-color: currentColor;
     }
 
     .hero-action {
@@ -393,7 +406,7 @@
         <div>
           <p class="eyebrow">Chrome extension</p>
           <h1>Outlook Compose HTML</h1>
-          <p class="tagline">Insert a local HTML email into your active Outlook draft.</p>
+          <p class="tagline">Insert a local HTML email into your active <a class="outlook-inline-link" href="https://outlook.office.com/mail/inbox/" target="_blank" rel="noopener noreferrer">Outlook</a> draft.</p>
           <div class="hero-action">
             <div class="access-routes">
               <div class="access-route">
@@ -405,7 +418,7 @@
             </div>
           </div>
         </div>
-        <img class="hero-icon" src="assets/outlook-compose-html-web-master.png?v=2026-11-26T02:30:44Z" width="630" height="630" alt="Purple envelope containing an HTML code sheet">
+        <img class="hero-icon" src="assets/outlook-compose-html-web-master.png?v=2026-11-26T03:05:05Z" width="630" height="630" alt="Purple envelope containing an HTML code sheet">
       </section>
 
       <section class="install" id="install">
@@ -438,12 +451,12 @@
 
       <section class="use-once" id="compose">
         <h2>Compose whenever.</h2>
-        <p><b>Open an Outlook draft, click the purple icon, and choose your HTML file.</b><br>The extension places it in the message body, ready for you to review and send.</p>
+        <p><b>Open an <a class="outlook-inline-link" href="https://outlook.office.com/mail/inbox/" target="_blank" rel="noopener noreferrer">Outlook</a> draft, click the purple icon, and choose your HTML file.</b><br>The extension places it in the message body, ready for you to review and send.</p>
       </section>
     </main>
 
     <footer>
-      <span>Built by: <a href="https://github.com/YodaSpow" target="_blank" rel="noopener noreferrer"><span class="footer-link-label">YodaSpow</span><span class="external-arrow" aria-hidden="true">↗</span></a> with ChatGPT · Chrome-only tested (macOS/Windows) · UI Build 2026-11-26T02:30:44Z</span>
+      <span>Built by: <a href="https://github.com/YodaSpow" target="_blank" rel="noopener noreferrer"><span class="footer-link-label">YodaSpow</span><span class="external-arrow" aria-hidden="true">↗</span></a> with ChatGPT · Chrome-only tested (macOS/Windows) · UI Build 2026-11-26T03:05:05Z</span>
       <button class="theme-toggle" type="button" aria-label="Switch to dark theme"><span class="theme-toggle-icon" aria-hidden="true">◐</span><span class="theme-toggle-label">Dark theme</span></button>
     </footer>
   </div>
